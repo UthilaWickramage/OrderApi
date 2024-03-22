@@ -10,17 +10,16 @@ namespace EFModels.Models
     public class ProductDBContext: DbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
-        public ProductDBContext(DbContextOptions dbContextOptions):base(dbContextOptions)
+        public ProductDBContext(DbContextOptions<ProductDBContext> dbContextOptions):base(dbContextOptions)
         {
             
         }
 
+        
 
-
-
-      
-
-
+        
     }
 }

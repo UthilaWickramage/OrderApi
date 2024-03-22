@@ -9,6 +9,7 @@ namespace EFModels.Models
 {
     public class Product
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -23,8 +24,11 @@ namespace EFModels.Models
         [Required]
         public double Price {  get; set; }
 
-            
+        public double Discount { get; set; }
+
         [Required]
         public int Qty { get; set; }
+
+        
     }
 }
