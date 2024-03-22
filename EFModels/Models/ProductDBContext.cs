@@ -18,8 +18,15 @@ namespace EFModels.Models
             
         }
 
-        
+        public ProductDBContext()
+        {
+            
+        }
 
-        
+
+
+
+
+
     }
 }
