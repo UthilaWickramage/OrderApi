@@ -21,7 +21,7 @@ internal class Program
 
 
         });
-        builder.Services.AddScoped<ICustomerService,CustomerService>();
+        builder.Services.AddScoped<ICustomerRepository,CustomerService>();
         builder.Services.AddScoped<IProductService, ProductService>();
 
             //});

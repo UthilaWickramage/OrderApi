@@ -11,8 +11,8 @@ namespace OrderApi.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerService customerService;
-        public CustomerController(ICustomerService iCustomerService)
+        private readonly ICustomerRepository customerService;
+        public CustomerController(ICustomerRepository iCustomerService)
         {
             customerService = iCustomerService;
         }

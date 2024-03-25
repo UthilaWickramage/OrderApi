@@ -4,40 +4,28 @@ using OrderApi.Dto;
 
 namespace OrderApi.Services.CustomerService
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService
     {
-        private readonly ProductDBContext _dbContext;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CustomerService(ProductDBContext productDBContext)
+        public CustomerService(ICustomerRepository repository)
         {
-            _dbContext = productDBContext;
+           _customerRepository = repository;
         }
         public void deleteCustomer(int id)
         {
-            var dbCustomer = _dbContext.Customers.Find(id);
-            if (dbCustomer == null)
-            {
-                return;
-            }
-            _dbContext.Customers.Remove(dbCustomer);
-           _dbContext.SaveChangesAsync();
+           _customerRepository.deleteCustomer(id);
             
         }
 
         public List<Customer> getAllCustomers()
         {
-            var dbCustomers = _dbContext.Customers.ToList();
-            return dbCustomers;
+           return _customerRepository.getAllCustomers();
         }
 
         public Customer getCustomer(int id)
         {
-            var dbCustomer =  _dbContext.Customers.Find(id);
-            if (dbCustomer == null)
-            {
-                return null;
-            }
-            return dbCustomer;
+           return _customerRepository.getCustomer(id);
         }
 
         public  Customer saveCustomer(CustomerDto customerDto)
@@ -45,23 +33,12 @@ namespace OrderApi.Services.CustomerService
             Customer customer = new Customer();
             customer.Name = customerDto.Name;
             customer.Address = customerDto.Address;
-            _dbContext.Customers.Add(customer);
-            _dbContext.SaveChanges();
-            return customer;
+           return _customerRepository.saveCustomer(customer);
         }
 
         public Customer updateCustomer(CustomerDto customerDto)
         {
-            var dbCustomer =  _dbContext.Customers.Find(customerDto.Id);
-            if (dbCustomer == null)
-            {
-                return null;
-            }
-            dbCustomer.Name = customerDto.Name;
-            dbCustomer.Address = customerDto.Address;
-
-           _dbContext.SaveChanges();
-            return dbCustomer;
+            return _customerRepository.updateCustomer(customerDto);
         }
     }
 }
