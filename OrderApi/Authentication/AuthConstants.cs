@@ -1,0 +1,8 @@
+﻿namespace OrderApi.Authentication
+{
+    public class AuthConstants
+    {
+        public const string ApiKeySectionName = "Authentication:ApiKey";
+        public const string ApiKeyName = "X-Api-Key";
+    }
+}

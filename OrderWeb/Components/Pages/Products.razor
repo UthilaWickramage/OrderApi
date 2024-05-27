@@ -1,0 +1,58 @@
+﻿@page "/products"
+@inject HttpClient http;
+<h3>Products</h3>
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}else if(products.Count == 0)
+{
+    <p><em>No products found</em></p>
+
+}
+else
+{
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Discount</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.ProductDescription</td>
+                    <td>@product.Price</td>
+                    <td>@product.Qty</td>
+                    <td>@product.Discount</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<Product> products = new List<Product>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await http.GetFromJsonAsync<List<Product>>("http://localhost:5029/api/Product");
+        if (result != null)
+        {
+            products = result;
+        }
+        
+    }
+
+
+}

@@ -1,0 +1,28 @@
+﻿@page "/customers"
+<h3>Customers</h3>
+@inject HttpClient http;
+@if (customers.Count <= 0)
+{
+    <span>Customers Loading....</span>
+}
+else{
+    <ul>
+        @foreach(var customer in customers)
+        {
+            <li>@customer.Name</li>
+        }
+    </ul>
+}
+
+@code {
+    List<Customer> customers = new List<Customer>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await http.GetFromJsonAsync<List<Customer>>("api/Customer");
+        if (result != null)
+        {
+            customers = result;
+        }
+    }
+}

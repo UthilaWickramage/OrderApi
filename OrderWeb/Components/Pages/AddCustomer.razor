@@ -1,0 +1,49 @@
+﻿@page "/add-customer"
+@using OrderApi.Services.CustomerService
+@inject HttpClient http
+
+<h3>Add a Customer</h3>
+
+<EditForm Model="Customer" method="post" FormName="AddCustomer" OnSubmit="HandleSubmit">
+    <table class="table table-borderless">
+        <tr>
+            <td>Name</td>
+
+            <td><InputText id="name" @bind-Value="Customer.Name"></InputText></td>
+
+
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <td>Address</td>
+
+            <td><InputText id="address" @bind-Value="Customer.Address"></InputText></td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <button class="btn btn-primary" onsubmit="">Add Customer</button>
+            </td>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </tr>
+    </table>
+  
+</EditForm>
+
+
+
+@code {
+    [SupplyParameterFromForm]
+    public Customer Customer { get; set; } = new();
+
+    private async Task HandleSubmit()
+    {
+        await http.PostAsJsonAsync<Customer>("http://localhost:5029/api/Customer",Customer);
+
+        
+    }
+
+}

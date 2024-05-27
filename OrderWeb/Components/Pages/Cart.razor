@@ -1,0 +1,99 @@
+﻿@page "/cart/{id:int}"
+@inject HttpClient http;
+<h3>Cart</h3>
+
+<div>
+<table>
+    <tr>
+        <td class="form-label">Select Product :</td>
+        <td></td>
+        <td>
+            <InputSelect class="form-control" id="product" @bind-Value="Product.Id" >
+                <option value="0">
+                    Select Product
+                </option>
+                @foreach(var product in products){
+                    <option value="@product.Id">
+                        @product.ProductName
+                    </option>
+                }
+            </InputSelect>
+        </td>
+        <td></td>
+        <td>
+            <button class="btn btn-primary">Add to Cart</button>
+        </td>
+    </tr>
+</table>
+</div>
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (products.Count == 0)
+{
+    <p><em>No products found</em></p>
+
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Item Total</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cartItem in cartItems)
+            {
+                <tr>
+                    <td>@cartItem.Product.ProductName</td>
+                    <td>@cartItem.Product.Price</td>
+                    <td>@cartItem.Qty</td>
+                    <td>(@cartItem.Qty * @cartItem.Product.Price)</td>
+            
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    List<Product> products = new List<Product>();
+    List<CartItem> cartItems = new List<CartItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await http.GetFromJsonAsync<List<Product>>("http://localhost:5029/api/Product");
+        if (result != null)
+        {
+            products = result;
+        }
+        Console.WriteLine(Id.ToString());
+        var result2 = await http.GetFromJsonAsync<List<CartItem>>("http://localhost:5029/api/Cart/Id?"+Id);
+        if (result2 != null)
+        {
+            cartItems = result2;
+
+        }
+
+    }
+
+
+   
+
+    private Product Product { get; set; } = new();
+
+    // private async HandleSubmit()
+    // {
+        
+    // }
+}

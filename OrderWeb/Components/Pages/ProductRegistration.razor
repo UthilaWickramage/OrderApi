@@ -1,0 +1,56 @@
+﻿@page "/product-registration"
+@inject HttpClient httpClient;
+<h3>Product Registration</h3>
+
+<EditForm Model="Product" method="post" FormName="AddProduct" OnSubmit="HandleSubmit">
+    <table class="table table-borderless">
+        <tr>
+            <td>Product Name</td>
+            <td><InputText id="name" @bind-Value=Product.ProductName></InputText></td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <td>Product Description</td>
+            <td><InputText id="description" @bind-Value=Product.ProductDescription></InputText></td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><InputNumber id="price" @bind-Value=Product.Price></InputNumber></td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <td>Discount</td>
+            <td><InputNumber id="discount" @bind-Value=Product.Discount></InputNumber></td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <td>Qty</td>
+            <td><InputNumber id="qty" @bind-Value=Product.Qty></InputNumber></td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <button class="btn btn-primary">Add Product</button>
+            </td>
+        </tr>
+    </table>
+
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    private Product Product { get; set; } = new();
+
+    private async Task HandleSubmit()
+    {
+        await httpClient.PostAsJsonAsync<Product>("http://localhost:5029/api/Product", Product);
+
+
+    }
+}
