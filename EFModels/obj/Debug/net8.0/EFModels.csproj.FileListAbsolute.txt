@@ -7,9 +7,9 @@ C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\EFModels.Generate
 C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\EFModels.AssemblyInfoInputs.cache
 C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\EFModels.AssemblyInfo.cs
 C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\EFModels.csproj.CoreCompileInputs.cache
+C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\EFModels.sourcelink.json
 C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\EFModels.dll
 C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\refint\EFModels.dll
 C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\EFModels.pdb
 C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\EFModels.genruntimeconfig.cache
 C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\ref\EFModels.dll
-C:\Users\uthil\source\repos\OrderApi\EFModels\obj\Debug\net8.0\EFModels.sourcelink.json

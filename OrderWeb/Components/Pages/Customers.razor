@@ -1,0 +1,51 @@
+﻿@page "/customers"
+@inject HttpClient http
+<h3>Customers</h3>
+
+@if (customers == null)
+{
+    <p><em>Loading...</em></p>
+}else if (customers.Count == 0)
+{
+    <p><em>No Customers found</em></p>
+
+}
+else
+{
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+       
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in customers)
+            {
+                <tr>
+                    <td>@customer.Id</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.Address</td>
+          
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<Customer> customers = new List<Customer>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await http.GetFromJsonAsync<List<Customer>>("http://localhost:5029/api/Customer");
+        if (result != null)
+        {
+            customers = result;
+        }
+    }
+
+
+}

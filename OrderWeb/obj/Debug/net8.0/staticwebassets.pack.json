@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\uthil\\source\\repos\\OrderApi\\OrderWeb\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OrderWeb.bundle.scp.css",
+      "PackagePath": "staticwebassets\\OrderWeb.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\uthil\\source\\repos\\OrderApi\\OrderWeb\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\uthil\\source\\repos\\OrderApi\\OrderWeb\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\uthil\\source\\repos\\OrderApi\\OrderWeb\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\uthil\\source\\repos\\OrderApi\\OrderWeb\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.OrderWeb.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.OrderWeb.props",
+      "PackagePath": "build\\OrderWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.OrderWeb.props",
+      "PackagePath": "buildMultiTargeting\\OrderWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.OrderWeb.props",
+      "PackagePath": "buildTransitive\\OrderWeb.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

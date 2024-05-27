@@ -12,26 +12,26 @@ namespace OrderApi.Services.ProductService
         {
             _dbContext = dBContext;
         }
-        public void deleteProduct(int id)
+        public async Task deleteProduct(int id)
         {
             var dbProduct =  _dbContext.Products.Find(id);
-            if (dbProduct == null)
+            if (dbProduct != null)
             {
-                return;
+                _dbContext.Products.Remove(dbProduct);
+
             }
-            _dbContext.Products.Remove(dbProduct);
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public List<Product> getAllProducts()
+        public async Task<List<Product>> getAllProducts()
         {
-            return _dbContext.Products.ToList();
+            return await _dbContext.Products.ToListAsync();
         }
 
-        public Product getProduct(int id)
+        public async Task<Product> getProduct(int id)
         {
-            var product =  _dbContext.Products.Find(id);
+            var product =  await _dbContext.Products.FindAsync(id);
             if (product == null)
             {
                 return null;
@@ -39,7 +39,7 @@ namespace OrderApi.Services.ProductService
             return product;
         }
 
-        public Product saveProduct(ProductDto productDto)
+        public async Task<Product> saveProduct(ProductDto productDto)
         {
             Product product = new Product();
 
@@ -50,13 +50,13 @@ namespace OrderApi.Services.ProductService
             product.Discount = productDto.Discount;
 
             _dbContext.Products.Add(product);
-             _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             return product;
         }
 
-        public Product updateProduct(ProductDto productDto)
+        public async Task<Product> updateProduct(ProductDto productDto)
         {
-            var dbProduct = _dbContext.Products.Find(productDto.Id);
+            var dbProduct = await _dbContext.Products.FindAsync(productDto.Id);
             if (dbProduct == null)
             {
                 return null;
@@ -66,7 +66,7 @@ namespace OrderApi.Services.ProductService
             dbProduct.Price = productDto.Price;
             dbProduct.Qty = productDto.Qty;
             dbProduct.Discount = productDto.Discount;
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             return dbProduct;
         }
     }

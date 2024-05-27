@@ -1,6 +1,9 @@
 using EFModels.Models;
 using Microsoft.EntityFrameworkCore;
+using OrderApi.Authentication;
+using OrderApi.Services.CartService;
 using OrderApi.Services.CustomerService;
+using OrderApi.Services.OrderService;
 using OrderApi.Services.ProductService;
 
 internal class Program
@@ -19,31 +22,32 @@ internal class Program
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"));
 
-
         });
-        builder.Services.AddScoped<ICustomerRepository,CustomerService>();
+        builder.Services.AddScoped<ICustomerService,CustomerService>();
         builder.Services.AddScoped<IProductService, ProductService>();
+        builder.Services.AddScoped<IOrderService, OrderService>();
+        builder.Services.AddScoped<ICartService, CartService>();
+        builder.Services.AddScoped<ApiKeyAuthFilter>();
+        //});
+        ////    var contextOptions = new DbContextOptionsBuilder<ProductDBContext>()
+        ////.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"))
+        ////.Options;
 
-            //});
-            ////    var contextOptions = new DbContextOptionsBuilder<ProductDBContext>()
-            ////.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"))
-            ////.Options;
+        //using var context = new ProductDBContext(contextOptions);
+        //Product product = new Product();
+        //product.ProductName = "Banana";
+        //product.ProductDescription = "Worlds Greatest food";
+        //product.Price = 250;
+        //product.Qty = 10;
+        //context.Add(product);
+        //context.SaveChanges();
 
-            //using var context = new ProductDBContext(contextOptions);
-            //Product product = new Product();
-            //product.ProductName = "Banana";
-            //product.ProductDescription = "Worlds Greatest food";
-            //product.Price = 250;
-            //product.Qty = 10;
-            //context.Add(product);
-            //context.SaveChanges();
+        //using (var context = new ProductDBContext())
+        //{
 
-            //using (var context = new ProductDBContext())
-            //{
+        //}
 
-            //}
-
-            var app = builder.Build();
+        var app = builder.Build();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

@@ -17,6 +17,6 @@ namespace OrderApi.Dto
 
         public int Qty { get; set; }
 
-        public List<Order> Orders { get; set; }
+       
     }
 }

@@ -22,39 +22,39 @@ namespace OrderApi.Controllers
         [HttpGet]
         public async Task<ActionResult<Product>> getAllProducts()
         {
-          var result =   productService.getAllProducts();
+          var result =  await productService.getAllProducts();
             return Ok(result);
         }
         [HttpGet("{id}")]
         //[Route("{id}")]
         public async Task<ActionResult<List<Product>>> getProduct(int id)
         {
-            var result = productService.getProduct(id);
+            var result = await productService.getProduct(id);
             return Ok(result);
         }
 
         [HttpPost]
         public async Task<ActionResult<List<Product>>> addProduct(ProductDto productDto)
         {
-            productService.saveProduct(productDto);
-            return Ok(productService.getAllProducts());
+            await productService.saveProduct(productDto);
+            return  Ok(await productService.getAllProducts());
         }
 
         [HttpPut]
         public async Task<ActionResult<List<Product>>> updateProduct(ProductDto newProduct)
         {
-            var result =  productService.updateProduct(newProduct);
+            var result =  await productService.updateProduct(newProduct);
             if (result == null)
             {
                 return NotFound();
             }
-            return Ok(productService.getAllProducts());
+            return Ok(await productService.getAllProducts());
         }
         [HttpDelete]
         public async Task<ActionResult<List<Product>>> deleteProduct(int id)
         {
-            productService.deleteProduct(id);
-            return Ok(productService.getAllProducts());
+            await productService.deleteProduct(id);
+            return Ok(await productService.getAllProducts());
         }
     }
 }

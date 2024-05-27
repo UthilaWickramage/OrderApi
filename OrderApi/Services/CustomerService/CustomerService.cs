@@ -1,44 +1,68 @@
 ﻿using EFModels.Models;
 using Microsoft.EntityFrameworkCore;
 using OrderApi.Dto;
+using System.Runtime.CompilerServices;
 
 namespace OrderApi.Services.CustomerService
 {
-    public class CustomerService
+    public class CustomerService : ICustomerService
     {
-        private readonly ICustomerRepository _customerRepository;
-
-        public CustomerService(ICustomerRepository repository)
+        private readonly ProductDBContext _dbContext;
+        public CustomerService(ProductDBContext productDBContext)
         {
-           _customerRepository = repository;
+            _dbContext = productDBContext;
         }
-        public void deleteCustomer(int id)
+        public async Task deleteCustomer(int id)
         {
-           _customerRepository.deleteCustomer(id);
+            var dbCustomer = _dbContext.Customers.Find(id);
+            if (dbCustomer == null)
+            {
+                return;
+            }
+             _dbContext.Customers.Remove(dbCustomer);
+            await _dbContext.SaveChangesAsync();
+
+        }
+
+        public async Task<List<Customer>> getAllCustomers()
+        {
+          
+            var dbCustomers =  await _dbContext.Customers.ToListAsync();
+            return dbCustomers;
+        }
+
+        public async Task<Customer> getCustomer(int id)
+        {
+            var dbCustomer =  await _dbContext.Customers.FindAsync(id);
+            if (dbCustomer == null)
+            {
+                return null;
+            }
+            return dbCustomer;
+        }
+
+        public  async Task<Customer> saveCustomer(Customer customer)
+        {
             
+            _dbContext.Customers.Add(customer);
+            await _dbContext.SaveChangesAsync();
+            return customer;
         }
 
-        public List<Customer> getAllCustomers()
+        public async Task<Customer> updateCustomer(CustomerDto customerDto)
         {
-           return _customerRepository.getAllCustomers();
+            var dbCustomer = await _dbContext.Customers.FindAsync(customerDto.Id);
+            if (dbCustomer == null)
+            {
+                return null;
+            }
+            dbCustomer.Name = customerDto.Name;
+            dbCustomer.Address = customerDto.Address;
+
+            await _dbContext.SaveChangesAsync();
+            return dbCustomer;
         }
 
-        public Customer getCustomer(int id)
-        {
-           return _customerRepository.getCustomer(id);
-        }
-
-        public  Customer saveCustomer(CustomerDto customerDto)
-        {
-            Customer customer = new Customer();
-            customer.Name = customerDto.Name;
-            customer.Address = customerDto.Address;
-           return _customerRepository.saveCustomer(customer);
-        }
-
-        public Customer updateCustomer(CustomerDto customerDto)
-        {
-            return _customerRepository.updateCustomer(customerDto);
-        }
+        
     }
 }

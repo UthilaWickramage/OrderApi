@@ -11,45 +11,47 @@ namespace OrderApi.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerRepository customerService;
-        public CustomerController(ICustomerRepository iCustomerService)
+        private readonly ICustomerService customerService;
+        public CustomerController(ICustomerService iCustomerService)
         {
             customerService = iCustomerService;
         }
 
-
         [HttpPost]
         public async Task<ActionResult<Customer>> saveCustomer(CustomerDto customerDto)
         {
-           var result  =  customerService.saveCustomer(customerDto);
+            Customer customer = new Customer();
+            customer.Name = customerDto.Name;
+            customer.Address = customerDto.Address;
+            var result  = await customerService.saveCustomer(customer);
             return Ok(result);
         }
         [HttpGet]
         public async Task<ActionResult<List<Customer>>> getAllCustomers()
         {
-          var result =  customerService.getAllCustomers();
+          var result =  await customerService.getAllCustomers();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> getCustomer(int id)
         {
-            var result = customerService.getCustomer(id);
+            var result = await customerService.getCustomer(id);
             return Ok(result);
         }
 
         [HttpPut]
         public async Task<ActionResult<Customer>> updateCustomer(CustomerDto customerDto)
         {
-          var result =  customerService.updateCustomer(customerDto);
-            return Ok(customerService.getAllCustomers());
+          var result =  await customerService.updateCustomer(customerDto);
+            return Ok(await customerService.getAllCustomers());
         }
 
         [HttpDelete]
         public async Task<ActionResult<List<Customer>>> deleteCustomer(int id)
         {
-            
-            return Ok(customerService.getAllCustomers());
+            await customerService.deleteCustomer(id);
+            return Ok();
         }
 
     }
